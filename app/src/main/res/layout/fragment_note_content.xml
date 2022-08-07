@@ -3,12 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
     tools:context=".NoteContentFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <include layout="@layout/top_bar_layout"/>
+        <EditText
+            android:id="@+id/note_content_page_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_background"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            android:hint="@string/content_page_title_hint"
+            android:textSize="30sp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:maxLength="24"
+            android:ellipsize="end"
+            android:autofillHints="标题"
+            android:inputType="text"/>
+        <EditText
+            android:id="@+id/note_content_page_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_background"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            android:textSize="30sp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:maxLength="24"
+            android:ellipsize="end"
+            android:autofillHints="标题"
+            android:inputType="text"/>
+    </LinearLayout>
 </FrameLayout>

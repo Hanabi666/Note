@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/note_item_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.zw.note.NoteListFragment"/>
 
 </LinearLayout>
