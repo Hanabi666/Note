@@ -23,8 +23,9 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     List<NoteEntity> noteEntityList;
     View view;
     Boolean isTwoPage;
-    public NoteListAdapter(List<NoteEntity> noteEntityList) {
+    public NoteListAdapter(List<NoteEntity> noteEntityList, Boolean isTwoPage) {
         this.noteEntityList = noteEntityList;
+        this.isTwoPage = isTwoPage;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{

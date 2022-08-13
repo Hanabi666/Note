@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 
+import preference.MySharedPreference;
+
 public class MainActivity extends AppCompatActivity {
 
     MyBroadCast myBroadCast = new MyBroadCast();
@@ -20,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
         registerReceiver(myBroadCast, intentFilter);
+        initView();
+    }
+
+    private void initView() {
+        int maxWidthDP = (int) (getResources().getDisplayMetrics().widthPixels
+                /getResources().getDisplayMetrics().density + 0.5f);
+        if(maxWidthDP >= 600){
+            MySharedPreference.getInstance(this).save("isTwoPage", true);
+        }else{
+            MySharedPreference.getInstance(this).save("isTwoPage", false);
+        }
     }
 
     @Override
