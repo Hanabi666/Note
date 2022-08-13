@@ -1,15 +1,15 @@
 package adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.zw.note.NoteContentFragment;
+import com.zw.note.NoteContentActivity;
 import com.zw.note.R;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import entity.NoteEntity;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHolder>{
 
-    List<NoteEntity> noteEntityList = new ArrayList<>();
+    List<NoteEntity> noteEntityList;
     View view;
     Boolean isTwoPage;
     public NoteListAdapter(List<NoteEntity> noteEntityList) {
@@ -46,9 +46,19 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item_layout, parent, false);
         ViewHolder holder = new ViewHolder(view);
+        NoteEntity noteEntity = noteEntityList.get(holder.getAdapterPosition());
         holder.mView.setOnClickListener(view1 -> {
             //此处编写点击item的监听方法
-
+            if (isTwoPage)
+            {
+                Intent intent = new Intent("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
+                intent.putExtra("noteTitle", noteEntity.getNoteTitle());
+                intent.putExtra("noteContent", noteEntity.getNoteContent());
+                view.getContext().sendBroadcast(intent);
+            } else{
+                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
+                        noteEntity.getNoteContent());
+            }
         });
         holder.mView.setOnLongClickListener(view1 -> {
             //此处编写长按item的监听方法
