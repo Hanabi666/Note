@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#00000000"
-            android:text="@string/save_btn_text"
+            tools:text="@string/save_btn_text"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:gravity="center"/>

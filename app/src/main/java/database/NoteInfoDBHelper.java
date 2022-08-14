@@ -48,8 +48,10 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
         return mWDB;
     }
     public void closeLink(){
-        mWDB.close();
-        mRDB.close();
+        if(mWDB!=null && mWDB.isOpen())
+            mWDB.close();
+        if(mRDB!=null && mRDB.isOpen())
+            mRDB.close();
     }
 
     @Override
@@ -58,7 +60,7 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
                 " (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
                 "title VARVHAR,"+
                 "content VARCHAR NOT NULL,"+
-                "edit_data VARCHAR NOT NULL);";
+                "edit_date VARCHAR NOT NULL);";
         sqLiteDatabase.execSQL(sql);
     }
 
@@ -67,7 +69,7 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<NoteEntity> getALLNoteInfo() throws ParseException {
+    public List<NoteEntity> getALLNoteInfo() {
         List<NoteEntity> noteEntityList = new ArrayList<>();
         String sql = "SELECT * FROM "+TABLE_NAME+";";
         Cursor cursor = mRDB.rawQuery(sql, null);
@@ -77,7 +79,12 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
             noteEntity.setNoteTitle(cursor.getString(1));
             noteEntity.setNoteContent(cursor.getString(2));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            Date date = format.parse(cursor.getString(3));
+            Date date = new Date();
+            try {
+                date = format.parse(cursor.getString(3));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             noteEntity.setEditDate(date);
             noteEntityList.add(noteEntity);
         }
@@ -85,7 +92,7 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
         return noteEntityList;
     }
 
-    public List<NoteEntity> queryNoteInfoById(int id) throws ParseException {
+    public List<NoteEntity> queryNoteInfoById(int id) {
         List<NoteEntity> noteEntityList = new ArrayList<>();
         String sql = "SELECT * FROM "+TABLE_NAME+" WHERE _id == "+id;
         Cursor cursor = mRDB.rawQuery(sql, null);
@@ -95,7 +102,12 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
             noteEntity.setNoteTitle(cursor.getString(1));
             noteEntity.setNoteContent(cursor.getString(2));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            Date date = format.parse(cursor.getString(3));
+            Date date = new Date();
+            try {
+                date = format.parse(cursor.getString(3));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             noteEntity.setEditDate(date);
             noteEntityList.add(noteEntity);
         }

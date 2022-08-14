@@ -1,10 +1,12 @@
 package adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,31 +49,18 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item_layout, parent, false);
         ViewHolder holder = new ViewHolder(view);
-        NoteEntity noteEntity = noteEntityList.get(holder.getAdapterPosition());
-        holder.mView.setOnClickListener(view1 -> {
-            //此处编写点击item的监听方法
-            if (isTwoPage)
-            {
-                Intent intent = new Intent("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
-                intent.putExtra("noteTitle", noteEntity.getNoteTitle());
-                intent.putExtra("noteContent", noteEntity.getNoteContent());
-                view.getContext().sendBroadcast(intent);
-            } else{
-                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
-                        noteEntity.getNoteContent());
-            }
-        });
-        holder.mView.setOnLongClickListener(view1 -> {
-            //此处编写长按item的监听方法
-            return true;
-        });
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull NoteListAdapter.ViewHolder holder, int position) {
         NoteEntity noteEntity = noteEntityList.get(position);
-        holder.noteTitle.setText(noteEntity.getNoteTitle());
+        if (noteEntity.getNoteTitle() == null){
+            holder.noteTitle.setVisibility(View.GONE);
+            holder.noteContent.setMaxLines(5);
+        } else{
+            holder.noteTitle.setText(noteEntity.getNoteTitle());
+        }
         holder.noteContent.setText(noteEntity.getNoteContent());
         Date editDate = noteEntity.getEditDate();
         final Date currentDate = new Date();
@@ -88,6 +77,25 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
             String editTime = String.format("%d:%d", editDate.getHours(), editDate.getMinutes());
             holder.editTime.setText(editTime);
         }
+        holder.mView.setOnClickListener(view1 -> {
+            //此处编写点击item的监听方法
+            if (isTwoPage)
+            {
+//                Intent intent = new Intent("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
+//                intent.putExtra("noteTitle", noteEntity.getNoteTitle());
+//                intent.putExtra("noteContent", noteEntity.getNoteContent());
+//                view.getContext().sendBroadcast(intent);
+                Toast.makeText(view.getContext(),"is two page", Toast.LENGTH_SHORT).show();
+            } else{
+//                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
+//                        noteEntity.getNoteContent());
+                Toast.makeText(view.getContext(),"is not two page", Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.mView.setOnLongClickListener(view1 -> {
+            //此处编写长按item的监听方法
+            return true;
+        });
     }
 
     @Override

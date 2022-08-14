@@ -1,6 +1,7 @@
 package com.zw.note;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,13 +9,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import java.util.List;
+
+import adapter.NoteListAdapter;
+import database.NoteInfoDBHelper;
+import entity.NoteEntity;
 import preference.MySharedPreference;
 
 public class MainActivity extends AppCompatActivity {
 
     MyBroadCast myBroadCast = new MyBroadCast();
-
+    NoteInfoDBHelper noteInfoDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,23 +31,20 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
         registerReceiver(myBroadCast, intentFilter);
-        initView();
+        initDataBase();
     }
 
-    private void initView() {
-        int maxWidthDP = (int) (getResources().getDisplayMetrics().widthPixels
-                /getResources().getDisplayMetrics().density + 0.5f);
-        if(maxWidthDP >= 600){
-            MySharedPreference.getInstance(this).save("isTwoPage", true);
-        }else{
-            MySharedPreference.getInstance(this).save("isTwoPage", false);
-        }
+    private void initDataBase() {
+        noteInfoDBHelper = NoteInfoDBHelper.getInstance(this);
+        noteInfoDBHelper.openWriteLink();
+        noteInfoDBHelper.openReadLink();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(myBroadCast);
+        noteInfoDBHelper.closeLink();
     }
 
     class MyBroadCast extends BroadcastReceiver {

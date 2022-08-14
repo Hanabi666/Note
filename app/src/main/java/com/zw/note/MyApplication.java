@@ -17,7 +17,7 @@ public class MyApplication extends Application {
             NoteInfoDBHelper.getInstance(this).openWriteLink();
             NoteInfoDBHelper.getInstance(this).initNoteInfo();
             NoteInfoDBHelper.getInstance(this).closeLink();
-            MySharedPreference.getInstance(this).save("isFirstOpen", true);
+            MySharedPreference.getInstance(this).save("isFirstOpen", false);
         }
     }
 
