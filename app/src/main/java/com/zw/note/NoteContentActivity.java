@@ -15,11 +15,16 @@ public class NoteContentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_content);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         String noteTitle = getIntent().getStringExtra("noteTitle");
         String noteContent = getIntent().getStringExtra("noteContent");
         NoteContentFragment noteContentFragment = (NoteContentFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.note_content_fragment);
-        NoteContentFragment.refresh(noteTitle, noteContent);
+        noteContentFragment.refresh(noteTitle, noteContent);
     }
 
     public static void actionStart(Context context, String noteTitle, String noteContent){

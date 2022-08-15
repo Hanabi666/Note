@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_color"
     tools:context=".NoteContentFragment">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
         <!-- TODO: Update blank fragment layout -->
         <include layout="@layout/top_bar_layout"/>
         <EditText
@@ -20,9 +17,9 @@
             android:layout_marginTop="30dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:padding="5dp"
+            android:padding="10dp"
             android:hint="@string/content_page_title_hint"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:singleLine="true"
             android:textIsSelectable="true"
             android:maxLength="24"
@@ -34,17 +31,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/selector_background"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:padding="5dp"
-            android:textSize="30sp"
-            android:singleLine="true"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:gravity="top"
             android:textIsSelectable="true"
-            android:maxLength="24"
             android:ellipsize="end"
-            android:autofillHints="标题"
-            android:inputType="text"/>
-    </LinearLayout>
-</FrameLayout>
+            android:lineSpacingMultiplier="1.5"
+            android:inputType="textMultiLine"
+            tools:text="在便签详情页，点击底部工具条上的图片按钮，即可插入图片。您可以直接拍照，或者从本地图库选择一张图片插入。便签含有图片时，图片会以缩略图的样式显示在便签列表首页，方便您随时查找"/>
+</LinearLayout>

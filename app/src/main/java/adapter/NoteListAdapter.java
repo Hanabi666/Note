@@ -48,8 +48,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item_layout, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -87,9 +86,9 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 //                view.getContext().sendBroadcast(intent);
                 Toast.makeText(view.getContext(),"is two page", Toast.LENGTH_SHORT).show();
             } else{
-//                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
-//                        noteEntity.getNoteContent());
-                Toast.makeText(view.getContext(),"is not two page", Toast.LENGTH_SHORT).show();
+                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
+                        noteEntity.getNoteContent());
+//                Toast.makeText(view.getContext(),"is not two page", Toast.LENGTH_SHORT).show();
             }
         });
         holder.mView.setOnLongClickListener(view1 -> {
