@@ -86,8 +86,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 //                view.getContext().sendBroadcast(intent);
                 Toast.makeText(view.getContext(),"is two page", Toast.LENGTH_SHORT).show();
             } else{
-                NoteContentActivity.actionStart(view.getContext(), noteEntity.getNoteTitle(),
-                        noteEntity.getNoteContent());
+                NoteContentActivity.actionStart(view.getContext(), noteEntity);
 //                Toast.makeText(view.getContext(),"is not two page", Toast.LENGTH_SHORT).show();
             }
         });

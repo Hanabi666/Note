@@ -119,7 +119,7 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
         try {
             mWDB.beginTransaction();
             ContentValues contentValues = new ContentValues();
-            contentValues.put("_id", noteEntity.getId());
+            //contentValues.put("_id", noteEntity.getId());
             contentValues.put("title", noteEntity.getNoteTitle());
             contentValues.put("content", noteEntity.getNoteContent());
             Date date = noteEntity.getEditDate();
@@ -176,5 +176,9 @@ public class NoteInfoDBHelper extends SQLiteOpenHelper {
         noteEntityList.add(setList);
         noteEntityList.add(setTodo);
         insertNoteInfo(noteEntityList);
+    }
+
+    public void alterNoteInfoById(NoteEntity note) {
+
     }
 }

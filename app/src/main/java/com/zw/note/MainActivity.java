@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import adapter.NoteListAdapter;
@@ -32,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction("com.zw.note"+".FRESH_NOTE_CONTENT_FRAGMENT");
         registerReceiver(myBroadCast, intentFilter);
         initDataBase();
+        FloatingActionButton fab = findViewById(R.id.add_floating_btn);
+        fab.setOnClickListener(view -> {
+            if (MySharedPreference.getInstance(this).getBoolean("isTwoPage", false)){
+                NoteContentActivity.actionStart(this, null);
+            }
+        });
     }
 
     private void initDataBase() {
@@ -47,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
         noteInfoDBHelper.closeLink();
     }
 
-    class MyBroadCast extends BroadcastReceiver {
+    static class MyBroadCast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String noteTitle = intent.getStringExtra("noteTitle");
-            String noteContent = intent.getStringExtra("noteContent");
-            NoteContentFragment noteContentFragment = (NoteContentFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.note_content_fragment);
-            View view = findViewById(R.id.note_content_layout);
-            view.setVisibility(View.VISIBLE);
-            noteContentFragment.refresh(noteTitle, noteContent);
+//            String noteTitle = intent.getStringExtra("noteTitle");
+//            String noteContent = intent.getStringExtra("noteContent");
+//            NoteContentFragment noteContentFragment = (NoteContentFragment) getSupportFragmentManager()
+//                    .findFragmentById(R.id.note_content_fragment);
+//            View view = findViewById(R.id.note_content_layout);
+//            view.setVisibility(View.VISIBLE);
+//            noteContentFragment.refresh(noteTitle, noteContent);
         }
     }
 }

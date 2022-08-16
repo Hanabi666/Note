@@ -5,10 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/note_item_fragment"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.zw.note.NoteListFragment"/>
+        android:layout_height="match_parent">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/note_item_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.zw.note.NoteListFragment"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_floating_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_baseline_add_36"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="30dp"/>
+    </FrameLayout>
 
 </LinearLayout>

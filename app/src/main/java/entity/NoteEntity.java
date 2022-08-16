@@ -8,6 +8,22 @@ public class NoteEntity {
     private String noteContent;
     private Date editDate;
 
+    public NoteEntity() {
+    }
+
+    public NoteEntity(int id, String noteTitle, String noteContent, Date date) {
+        this.id = id;
+        this.noteTitle = noteTitle;
+        this.noteContent = noteContent;
+        this.editDate = date;
+    }
+
+    public NoteEntity(String noteTitle, String noteContent, Date editDate) {
+        this.noteTitle = noteTitle;
+        this.noteContent = noteContent;
+        this.editDate = editDate;
+    }
+
     public int getId() {
         return id;
     }
